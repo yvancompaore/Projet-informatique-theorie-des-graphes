@@ -321,3 +321,18 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx] = Edge(weight, ei);
 }
 
+//void Graph::algodeconnexion()
+//{
+//    std::map<int,Vertex> listesommet;
+//    int nbsommet; /// nbsommet = listesommet.size() ?
+//    int i;
+//
+//    for(const auto& elem : listesommet)
+//    {
+//        for(i=0;i<nbsommet;i++)
+//        {
+//
+//            if(elem.second.m_in.size()==0 && elem.second.m_out.size()==0) /// si le sommet n'a pas de predecesseur ni de succésseurs stop
+//        }
+//    }
+//}

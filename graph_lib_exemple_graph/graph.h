@@ -315,6 +315,7 @@ class Graph
 
         /// Nouvelles méthodes :
         void chargergraphe();
+        void algodeconnexion();
 };
 
 
