@@ -265,6 +265,8 @@ class GraphInterface
 
          grman::WidgetButton m_boutonsupp;//boutonsupprimer
          grman::WidgetImage m_bouton_supp_image; //image supprimer
+        grman::WidgetButton m_boutonsave;//boutonsupprimer
+         grman::WidgetImage m_bouton_save_image; //image supprimer
 
 
 

@@ -1,5 +1,16 @@
 #include "test.h"
+#include <sstream>
 
+
+namespace patch
+{
+    template < typename T > std::string to_string(const T& n)
+    {
+        std::ostringstream stm;
+        stm << n;
+        return stm.str();
+    }
+}
 /***************************************************
                     THING (test)
 
@@ -156,7 +167,7 @@ void Thing::update()
         clown->set_animate_tempo(rand()%5+3);
 
         /// Mise à jour du nombre de clowns dynamiques sur le label du lien
-        m_lien2_label.set_message( std::to_string( m_dynaclowns.size() ) );
+        m_lien2_label.set_message( patch::to_string( m_dynaclowns.size() ) );
     }
 
     /// Utilisation de l'autre bouton (méchant clown) pour enlever un clown
@@ -177,7 +188,7 @@ void Thing::update()
         delete clown;
 
         /// Mise à jour du nombre de clowns dynamiques sur le label du lien
-        m_lien2_label.set_message( std::to_string( m_dynaclowns.size() ) );
+        m_lien2_label.set_message( patch::to_string( m_dynaclowns.size() ) );
     }
 }
 
