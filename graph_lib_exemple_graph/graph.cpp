@@ -159,6 +159,18 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_main_box.set_dim(908,720);
     m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
     m_main_box.set_bg_color(BLANCJAUNE);
+
+    //affichage de boutton
+    m_tool_box.add_child(m_boutonsupp);//affichage boutton sur la zone des bouttons
+    m_boutonsupp.set_dim(40,30);//coordoner du boutton sur lecran
+    m_boutonsupp.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
+    m_boutonsupp.set_bg_color(NOIR);
+    m_boutonsupp.add_child(m_bouton_supp_image);//ajout de l'image
+    m_bouton_supp_image.set_pic_name("supp.png");
+
+
+
+
 }
 
 
