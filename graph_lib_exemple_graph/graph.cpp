@@ -237,7 +237,7 @@ void Graph::chargergraphe()
     ///std::cout << "Entrez le nom du fichier contenant le graphe : " << std::endl;
     ///std::cin >> nomgraphe;
 
-    std::ifstream fichier("Marin_Antartique.txt");
+    std::ifstream fichier("test7.txt");
     if(fichier)
     {
         //Tout est prêt pour la lecture.
@@ -322,7 +322,8 @@ void Graph::update()
     if(m_interface->m_boutonsave.clicked())
     {
         std::cout<< "bon"<<std::endl ;
-        //action a faire
+        Graph g;
+        g.sauvegarderfichier();
 
 
     }
@@ -396,7 +397,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
 //    }
 //}
 
-<<<<<<< HEAD
+
 /// eidx index of edge to remove
 void Graph::test_remove_edge(int eidx)
 {
@@ -466,10 +467,23 @@ void Graph::test_remove_sommet()
              test_remove_edge(b);
     }
 
+    for(auto& elem: m_edges)
+    {
+       if((elem.second.m_to==a)||(elem.second.m_from==a))
+       {
+           test_remove_edge(elem.first);
+       }
+
+
+    }
+
+
+
+
      m_interface->m_main_box.remove_child( remed.m_interface->m_top_box );
      m_vertices.erase(a);
-=======
 
+}
 void Graph::sauvegarderfichier()
 {
     std::string nom;
@@ -504,7 +518,6 @@ void Graph::sauvegarderfichier()
         fichier << elem2.second.m_weight << std::endl;
     }
 
->>>>>>> 40886f401b115eb623a73363991d97e11315ecbe
 
 }
 
