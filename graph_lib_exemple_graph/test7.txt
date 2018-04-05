@@ -1,0 +1,13 @@
+7 5
+0 30 49 20 Baleine.jpg
+1 60 708 29 Cachalot.jpg
+2 50 24 202 Calamar.jpg
+4 100 773 336 Humain.jpg
+5 0 26 483 Krill.jpg
+6 0 298 498 Phoque.jpg
+7 0 773 555 Pingouins.jpg
+0 1 2 50
+1 0 1 50
+3 4 1 25
+7 2 0 100
+8 5 2 20
