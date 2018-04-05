@@ -278,8 +278,8 @@ void Graph::chargergraphe()
 
         add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
 
-        m_edges[i].setfrom(valeur3);
-        m_edges[i].setto(valeur4);
+        //m_edges[i].setfrom(valeur3);
+        //m_edges[i].setto(valeur4);
 
     }
 }
@@ -355,6 +355,12 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     EdgeInterface *ei = new EdgeInterface(m_vertices[id_vert1], m_vertices[id_vert2]);
     m_interface->m_main_box.add_child(ei->m_top_edge);
     m_edges[idx] = Edge(weight, ei);
+
+    m_edges[idx].m_from=id_vert1;
+    m_edges[idx].m_to=id_vert2;
+
+    m_vertices[id_vert1].m_out.push_back(idx);
+    m_vertices[id_vert2].m_in.push_back(idx);
 }
 
 //void Graph::algodeconnexion()
