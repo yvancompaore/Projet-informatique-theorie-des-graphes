@@ -137,7 +137,15 @@ void Edge::post_update()
     m_weight = m_interface->m_slider_weight.get_value();
 }
 
+void Edge::setfrom(int from)
+{
+    m_from=from;
+}
 
+void Edge::setto(int to)
+{
+    m_to=to;
+}
 
 /***************************************************
                     GRAPH
@@ -271,6 +279,10 @@ void Graph::chargergraphe()
         fichier >> valeur2;
 
         add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
+
+        m_edges[i].setfrom(valeur3);
+        m_edges[i].setto(valeur4);
+
     }
 }
 
@@ -384,6 +396,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
 //    }
 //}
 
+<<<<<<< HEAD
 /// eidx index of edge to remove
 void Graph::test_remove_edge(int eidx)
 {
@@ -455,6 +468,43 @@ void Graph::test_remove_sommet()
 
      m_interface->m_main_box.remove_child( remed.m_interface->m_top_box );
      m_vertices.erase(a);
+=======
+
+void Graph::sauvegarderfichier()
+{
+    std::string nom;
+    std::cout << "Entrez le nom du fichier de sauvegarde : " << std::endl;
+    std::cin >> nom;
+
+    nom=nom+".txt";
+    std::ofstream fichier(nom.c_str());
+
+    int nbsommets, nbarcs;
+    nbsommets=m_vertices.size();
+    nbarcs=m_edges.size();
+
+    fichier << nbsommets;
+    fichier << " ";
+    fichier << nbarcs << std::endl;
+
+    for (const auto& elem : m_vertices)
+    {
+        fichier << elem.first << " ";
+        fichier << elem.second.m_value << " ";
+        fichier << elem.second.m_interface->m_top_box.get_posx() << " ";
+        fichier << elem.second.m_interface->m_top_box.get_posy() << " ";
+        fichier << elem.second.m_interface->m_img.getpicname() << std::endl;
+    }
+
+    for (const auto& elem2 : m_edges)
+    {
+        fichier << elem2.first << " ";
+        fichier << elem2.second.m_from << " ";
+        fichier << elem2.second.m_to << " ";
+        fichier << elem2.second.m_weight << std::endl;
+    }
+
+>>>>>>> 40886f401b115eb623a73363991d97e11315ecbe
 
 }
 
