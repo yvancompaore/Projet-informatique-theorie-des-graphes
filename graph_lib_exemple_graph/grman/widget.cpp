@@ -296,6 +296,12 @@ void WidgetImage::draw()
     show_picture(m_view, m_pic_name, 0, 0, m_pic_idx);
 }
 
+std::string WidgetImage::getpicname()
+{
+    return m_pic_name;
+}
+
+
 
 
 /***************************************************
@@ -407,3 +413,6 @@ void WidgetEdge::draw()
 
 
 }
+
+
+

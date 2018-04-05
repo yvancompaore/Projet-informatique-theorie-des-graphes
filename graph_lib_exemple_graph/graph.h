@@ -235,6 +235,9 @@ class Edge
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+
+        void setfrom(int from);
+        void setto(int to);
 };
 
 
@@ -318,6 +321,8 @@ class Graph
         /// Nouvelles méthodes :
         void chargergraphe();
         void algodeconnexion();
+        void sauvegarderfichier();
+
 };
 
 

@@ -137,7 +137,15 @@ void Edge::post_update()
     m_weight = m_interface->m_slider_weight.get_value();
 }
 
+void Edge::setfrom(int from)
+{
+    m_from=from;
+}
 
+void Edge::setto(int to)
+{
+    m_to=to;
+}
 
 /***************************************************
                     GRAPH
@@ -269,6 +277,10 @@ void Graph::chargergraphe()
         fichier >> valeur2;
 
         add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
+
+        m_edges[i].setfrom(valeur3);
+        m_edges[i].setto(valeur4);
+
     }
 }
 
@@ -345,18 +357,59 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_edges[idx] = Edge(weight, ei);
 }
 
-void Graph::algodeconnexion()
+//void Graph::algodeconnexion()
+//{
+//    std::map<int,Vertex> listesommet;
+//    int nbsommet; /// nbsommet = listesommet.size() ?
+//    int i;
+//
+//    for(const auto& elem : listesommet)
+//    {
+//        for(i=0;i<nbsommet;i++)
+//        {
+//
+//            if(elem.second.m_in.size()==0 && elem.second.m_out.size()==0) /// si le sommet n'a pas de predecesseur ni de succésseurs stop
+//        }
+//    }
+//}
+
+
+void Graph::sauvegarderfichier()
 {
-    std::map<int,Vertex> listesommet;
-    int nbsommet; /// nbsommet = listesommet.size() ?
-    int i;
+    std::string nom;
+    std::cout << "Entrez le nom du fichier de sauvegarde : " << std::endl;
+    std::cin >> nom;
 
-    for(const auto& elem : listesommet)
+    nom=nom+".txt";
+    std::ofstream fichier(nom.c_str());
+
+    int nbsommets, nbarcs;
+    nbsommets=m_vertices.size();
+    nbarcs=m_edges.size();
+
+    fichier << nbsommets;
+    fichier << " ";
+    fichier << nbarcs << std::endl;
+
+    for (const auto& elem : m_vertices)
     {
-        for(i=0;i<nbsommet;i++)
-        {
-
-            if(elem.second.m_in.size()==0 && elem.second.m_out.size()==0) /// si le sommet n'a pas de predecesseur ni de succésseurs stop
-        }
+        fichier << elem.first << " ";
+        fichier << elem.second.m_value << " ";
+        fichier << elem.second.m_interface->m_top_box.get_posx() << " ";
+        fichier << elem.second.m_interface->m_top_box.get_posy() << " ";
+        fichier << elem.second.m_interface->m_img.getpicname() << std::endl;
     }
+
+    for (const auto& elem2 : m_edges)
+    {
+        fichier << elem2.first << " ";
+        fichier << elem2.second.m_from << " ";
+        fichier << elem2.second.m_to << " ";
+        fichier << elem2.second.m_weight << std::endl;
+    }
+
+
 }
+
+
+
