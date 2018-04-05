@@ -113,7 +113,7 @@
 	<iostream>
 	"graph.h"
 
-1522879688 D
+1522936290 D
 
 1522851275 source:c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\coords.cpp
 	"coords.h"
@@ -141,7 +141,19 @@
 1522575424 c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\coords.h
 	<cmath>
 
-1522515823 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman.cpp
+1522940394 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
 
 1522884949 039c886d56390eb6a6318c29e69fe4fb7a3a2
 	<cmath>
@@ -192,7 +204,13 @@
 
 1509222372 c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman_couleurs.h
 
-1522636616 c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\widget.h
+1522940394 c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
 
 1522932413 source:c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\widget.cpp
 	"widget.h"
@@ -202,29 +220,34 @@
 	<iostream>
 	"graph.h"
 
-<<<<<<< HEAD
-1522934749 c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.h
-=======
-1522636919 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\widget.cpp
-	"widget.h"
-
-1522770076 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\main.cpp
-
-1522936290 c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.h
->>>>>>> 40886f401b115eb623a73363991d97e11315ecbe
+1522940636 c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.h
 	<vector>
 	<map>
 	<string>
 	<memory>
 	"grman/grman.h"
 
-<<<<<<< HEAD
-1522938734 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.cpp
-=======
-1522879688 c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.h
+1522940394 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\widget.cpp
+	"widget.h"
 
-1522884949 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.cpp
->>>>>>> 40886f401b115eb623a73363991d97e11315ecbe
+1522940394 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+
+1522936290 c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.h
+
+1522884949 86f401b115eb623a73363991d97e11315ecbe
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+	"graph.h"
+	<sstream>
+	<fstream>
+
+1522940394 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.cpp
 	"graph.h"
 	<sstream>
 	<fstream>
