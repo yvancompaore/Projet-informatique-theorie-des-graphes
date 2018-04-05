@@ -159,6 +159,27 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_main_box.set_dim(908,720);
     m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
     m_main_box.set_bg_color(BLANCJAUNE);
+
+    //affichage de boutton supp
+    m_tool_box.add_child(m_boutonsupp);//affichage boutton sur la zone des bouttons
+    //m_boutonsupp.set_dim(40,30);//coordoner du boutton sur lecran
+    m_boutonsupp.set_frame(2,2,40,30);//
+   // m_boutonsupp.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
+    m_boutonsupp.set_bg_color(NOIR);
+    m_boutonsupp.add_child(m_bouton_supp_image);//ajout de l'image
+    m_bouton_supp_image.set_pic_name("supp.png");
+
+     //affichage de boutton save
+    m_tool_box.add_child(m_boutonsave);//affichage boutton sur la zone des bouttons
+    //m_boutonsave.set_dim(40,30);
+    m_boutonsave.set_frame(2,50,40,30);
+    //m_boutonsave.set_gravity_x(grman::GravityX::Right);
+    m_boutonsave.set_bg_color(NOIR);
+    m_boutonsave.add_child(m_bouton_save_image);//ajout de l'image
+    m_bouton_save_image.set_pic_name("save.png");
+
+
+
 }
 
 
@@ -270,6 +291,21 @@ void Graph::update()
 
     for (auto &elt : m_edges)
         elt.second.post_update();
+    //si on appuie sur suprrimer
+    if(m_interface->m_boutonsupp.clicked())
+    {
+        std::cout<< "ok"<<std::endl ;
+        //action a faire
+    }
+
+    //si on appuie sur sauvegarder
+    if(m_interface->m_boutonsave.clicked())
+    {
+        std::cout<< "bon"<<std::endl ;
+        //action a faire
+    }
+
+
 
 }
 

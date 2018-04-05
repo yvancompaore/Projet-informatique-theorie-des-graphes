@@ -263,6 +263,12 @@ class GraphInterface
         /// Dans cette boite seront ajoutés des boutons de contrôle etc...
         grman::WidgetBox m_tool_box;
 
+         grman::WidgetButton m_boutonsupp;//boutonsupprimer
+         grman::WidgetImage m_bouton_supp_image; //image supprimer
+        grman::WidgetButton m_boutonsave;//boutonsupprimer
+         grman::WidgetImage m_bouton_save_image; //image supprimer
+
+
 
         // A compléter éventuellement par des widgets de décoration ou
         // d'édition (boutons ajouter/enlever ...)
