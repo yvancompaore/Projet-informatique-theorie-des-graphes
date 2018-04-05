@@ -318,6 +318,8 @@ class Graph
         /// Nouvelles méthodes :
         void chargergraphe();
         void algodeconnexion();
+        void test_remove_edge(int eidx);
+        void test_remove_sommet();
 };
 
 
