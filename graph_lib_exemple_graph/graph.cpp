@@ -186,6 +186,12 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_boutonsave.add_child(m_bouton_save_image);//ajout de l'image
     m_bouton_save_image.set_pic_name("save.png");
 
+    m_tool_box.add_child(m_boutonajouter);
+    m_boutonajouter.set_frame(2,90,40,30);
+    m_boutonajouter.set_bg_color(NOIR);
+    m_boutonajouter.add_child(m_boutonajouter_image);
+    m_boutonajouter_image.set_pic_name("ajouter.png");
+
 
 
 }
@@ -237,7 +243,7 @@ void Graph::chargergraphe()
     ///std::cout << "Entrez le nom du fichier contenant le graphe : " << std::endl;
     ///std::cin >> nomgraphe;
 
-    std::ifstream fichier("test7.txt");
+    std::ifstream fichier("Marin_Antartique.txt");
     if(fichier)
     {
         //Tout est prêt pour la lecture.
@@ -322,8 +328,21 @@ void Graph::update()
     if(m_interface->m_boutonsave.clicked())
     {
         std::cout<< "bon"<<std::endl ;
-        Graph g;
-        g.sauvegarderfichier();
+
+        sauvegarderfichier();
+
+
+    }
+
+     if(m_interface->m_boutonajouter.clicked())
+    {
+        std::cout<< "mal"<<std::endl ;
+        std::cout<< "Quel sommet voulez vous rajouter?"<<std::endl ;
+        int a;
+        std::cin>>a;
+        ajoutsommetutilisateur(a);
+
+
 
 
     }
@@ -417,6 +436,7 @@ void Graph::test_remove_edge(int eidx)
 /// mais il faut bien enlever le conteneur d'interface m_top_edge de l'arc de la main_box du graphe
         m_interface->m_main_box.remove_child( remed.m_interface->m_top_edge);
     }
+
 /// Il reste encore à virer l'arc supprimé de la liste des entrants et sortants des 2 sommets to et from !
 /// References sur les listes de edges des sommets from et to
     std::vector<int> &vefrom = m_vertices[remed.m_from].m_out;
@@ -456,7 +476,7 @@ void Graph::test_remove_sommet()
              test_remove_edge(b);
     }
 
-    //suppression de ses rretes sortant
+    //suppression de ses aretes sortant
     for(int i=0; i<m_vertices[a].m_out.size(); i++)
     {
         //std::cout<< m_vertices[a].m_in.size() << " ";
@@ -521,5 +541,102 @@ void Graph::sauvegarderfichier()
 
 }
 
+void Graph::ajoutsommetutilisateur(int a)
+{
+    //m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+    // La ligne précédente est en gros équivalente à :
+    // m_interface = new GraphInterface(50, 0, 750, 600);
+
+
+    std::ifstream fichier("Marin_Antartique.txt");
+    if(fichier)
+    {
+        //Tout est prêt pour la lecture.
+    }
+    else
+    {
+        std::cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << std::endl;
+    }
+
+    /// on récupère le nombre de sommets et d'arcs du graphe en début de fichier :
+    int nbarcs, nbsommets;
+    fichier >> nbsommets;
+    fichier >> nbarcs;
+
+    /// on récupère les informations de chaques sommets
+    int i;
+    int valeur1, valeur3, valeur4;
+    double valeur2;
+    std::string nomdelimage;
+
+    for(i=0; i<nbsommets; i++)
+    {
+        fichier >> valeur1;
+        fichier >> valeur2;
+        fichier >> valeur3;
+        fichier >> valeur4;
+        fichier >> nomdelimage;
+
+        if(a==valeur1)
+        {
+        add_interfaced_vertex(valeur1, valeur2, valeur3, valeur4, nomdelimage);
+        }
+    }
+
+
+    /// on récupère les informations de chaques arcs
+   for(i=0; i<nbarcs; i++)
+    {
+        fichier >> valeur1;
+        fichier >> valeur3;
+        fichier >> valeur4;
+        fichier >> valeur2;
+
+     if(valeur3==a)
+      {
+          std::cout<< " i= " << i;
+           std::cout<< " pk1" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
+           std::cout<< std::endl;
+
+        add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
+
+
+        m_edges[i].setfrom(valeur3);
+        m_edges[i].setto(valeur4);
+      }
+
+
+     if(valeur4==a)
+      {
+
+        std::cout<< " i= " << i;
+           std::cout<< " pk2" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
+           std::cout<< std::endl;
+        add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
+    m_edges[i].setfrom(valeur3);
+    m_edges[i].setto(valeur4);
+    std::cout<< " pk3" << " "<< i << " "<<m_edges[i].m_from << " "<<  m_edges[i].m_to;
+
+
+
+      }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 

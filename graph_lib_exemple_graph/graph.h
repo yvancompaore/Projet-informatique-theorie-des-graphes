@@ -270,7 +270,8 @@ class GraphInterface
          grman::WidgetImage m_bouton_supp_image; //image supprimer
         grman::WidgetButton m_boutonsave;//boutonsupprimer
          grman::WidgetImage m_bouton_save_image; //image supprimer
-
+        grman::WidgetButton m_boutonajouter;//bouton ajouter
+         grman::WidgetImage m_boutonajouter_image;//image bouton ajouter
 
 
         // A compléter éventuellement par des widgets de décoration ou
@@ -326,6 +327,7 @@ class Graph
         void test_remove_sommet();
 
         void sauvegarderfichier();
+        void ajoutsommetutilisateur(int a);
 
 };
 
