@@ -151,6 +151,8 @@ class Vertex
 
     public:
 
+        bool m_actif=true;
+
         /// Les constructeurs sont à compléter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
         Vertex (double value=0, VertexInterface *interface=nullptr) :
@@ -224,6 +226,8 @@ class Edge
 
 
     public:
+
+        bool m_actif=true;
 
         /// Les constructeurs sont à compléter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
@@ -328,6 +332,10 @@ class Graph
 
         void sauvegarderfichier();
         void ajoutsommetutilisateur(int a);
+
+        void algokconex();
+        int fact(int k);
+        int nbcombi(int k, int n);
 
 };
 

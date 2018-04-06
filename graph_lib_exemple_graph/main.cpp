@@ -31,6 +31,7 @@ int main()
 
     grman::fermer_allegro();
 
+    g.algokconex();
     g.sauvegarderfichier();
 
     return 0;
