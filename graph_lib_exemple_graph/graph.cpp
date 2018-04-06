@@ -246,6 +246,7 @@ void Graph::chargergraphe()
 
     std::ifstream fichier("Insectes.txt");
 
+
     if(fichier)
     {
         //Tout est prêt pour la lecture.
