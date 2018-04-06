@@ -237,7 +237,7 @@ void Graph::chargergraphe()
     ///std::cout << "Entrez le nom du fichier contenant le graphe : " << std::endl;
     ///std::cin >> nomgraphe;
 
-    std::ifstream fichier("test7.txt");
+    std::ifstream fichier("Marin_Antartique.txt");
     if(fichier)
     {
         //Tout est prêt pour la lecture.
@@ -367,13 +367,13 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_interface->m_main_box.add_child(ei->m_top_edge);
     m_edges[idx] = Edge(weight, ei);
 
-<<<<<<< HEAD
+
     m_edges[idx].m_from=id_vert1;
     m_edges[idx].m_to=id_vert2;
 
     m_vertices[id_vert1].m_out.push_back(idx);
     m_vertices[id_vert2].m_in.push_back(idx);
-=======
+
     /// OOOPS ! Prendre en compte l'arc ajouté dans la topologie du graphe !
     m_edges[idx].m_from = id_vert1;
     m_edges[idx].m_to = id_vert2;
@@ -386,7 +386,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
 
 
 
->>>>>>> 03824034b5803393fb6778d97a1be3be0f1f9026
+
 }
 
 //void Graph::algodeconnexion()
