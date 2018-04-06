@@ -286,8 +286,8 @@ void Graph::chargergraphe()
 
         add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
 
-        m_edges[i].setfrom(valeur3);
-        m_edges[i].setto(valeur4);
+        //m_edges[i].setfrom(valeur3);
+        //m_edges[i].setto(valeur4);
 
     }
 }
@@ -386,6 +386,13 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_interface->m_main_box.add_child(ei->m_top_edge);
     m_edges[idx] = Edge(weight, ei);
 
+
+    m_edges[idx].m_from=id_vert1;
+    m_edges[idx].m_to=id_vert2;
+
+    m_vertices[id_vert1].m_out.push_back(idx);
+    m_vertices[id_vert2].m_in.push_back(idx);
+
     /// OOOPS ! Prendre en compte l'arc ajouté dans la topologie du graphe !
     m_edges[idx].m_from = id_vert1;
     m_edges[idx].m_to = id_vert2;
@@ -398,21 +405,56 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
 
 
 
+
 }
 
 //void Graph::algodeconnexion()
 //{
-//    std::map<int,Vertex> listesommet;
-//    int nbsommet; /// nbsommet = listesommet.size() ?
-//    int i;
+//    int nbsommets, i,j,k;
+//    int ctp=0;
+//    nbsommets=m_vertices.size();
 //
-//    for(const auto& elem : listesommet)
+//    std::vector<std::vector<Vertex>> mapi;
+//    std::vector<Vertex> sauvegarde;
+//
+//    for(i=0;i<nbsommets;i++)
 //    {
-//        for(i=0;i<nbsommet;i++)
-//        {
+//        sauvegarde.push_back(m_vertices[i]);
+//        test_remove_vertex(i);
+//        nbsommets=m_vertices.size();
 //
-//            if(elem.second.m_in.size()==0 && elem.second.m_out.size()==0) /// si le sommet n'a pas de predecesseur ni de succésseurs stop
+//        for(j=0;j<nbsommets;j++)
+//        {
+//            if(m_vertices[j].m_in.size()==0 && m_vertices[j].m_out.size()==0)
+//            {
+//                mapi[cpt].push_back(m_vertices[j]);
+//                cpt++;
+//            }
 //        }
+//
+//        for(k=0;k<sauvegarde.size();k++)
+//        {
+//            test_ajouter_vertex(sauvegarde[k]);
+//        }
+//
+//        for(k=0;k<sauvegarde.size();k++)
+//        {
+//            sauvegarde.pop_back();
+//        }
+//
+//
+//    }
+//
+//    for(i=0;i<mapi.size();i++)
+//    {
+//        std::cout << i << " : ";
+//
+//        for(j=0;j<mapi[i].size();j++)
+//        {
+//           /// afficher le numero du sommet
+//        }
+//
+//        std::cout << std::endl;
 //    }
 //}
 

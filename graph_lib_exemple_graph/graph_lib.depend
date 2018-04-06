@@ -121,7 +121,7 @@
 1522851275 c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\coords.h
 	<cmath>
 
-1522934515 source:c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman.cpp
+1522946485 source:c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman.cpp
 	<cmath>
 	<unordered_map>
 	<unordered_set>
@@ -141,7 +141,7 @@
 1522575424 c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\coords.h
 	<cmath>
 
-1522942155 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman.cpp
+1523010600 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman.cpp
 	<cmath>
 	<unordered_map>
 	<unordered_set>
@@ -235,7 +235,12 @@
 	<iostream>
 	"graph.h"
 
-1522936290 c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.h
+1522946013 c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
 
 1522884949 86f401b115eb623a73363991d97e11315ecbe
 	<vector>
@@ -247,12 +252,12 @@
 	<sstream>
 	<fstream>
 
-1522982876 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.cpp
+1523010600 source:c:\users\compaore\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.cpp
 	"graph.h"
 	<sstream>
 	<fstream>
 
-1522932161 source:c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.cpp
+1522947879 source:c:\users\thomas\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.cpp
 	"graph.h"
 	<sstream>
 	<fstream>
