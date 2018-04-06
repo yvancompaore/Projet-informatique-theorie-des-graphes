@@ -243,7 +243,9 @@ void Graph::chargergraphe()
     ///std::cout << "Entrez le nom du fichier contenant le graphe : " << std::endl;
     ///std::cin >> nomgraphe;
 
-    std::ifstream fichier("Connexite_Rap.txt");
+
+    std::ifstream fichier("Insectes.txt");
+
     if(fichier)
     {
         //Tout est prêt pour la lecture.
@@ -458,82 +460,82 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
 //    }
 //}
 
-void Graph::algokconex()
-{
-    int i, j, k, o, p, m;
-    int nbsommets=m_vertices.size();
-    int nbs,nba;
-
-    /// i = nb de sommets que l'on enleve
-    for(i=1;i<nbsommets+1;i++){
-
-        /// j = num de la combinaison testé
-        for(j=0;j<nbcombi(i,nbsommets);j++){
-
-
-
-            /// k = num du sommet enlevé, on desactive les sommets
-            for(k=0;k<i;k++){
-
-                m_vertices[k].m_actif=false;
-
-                /// on desactive les aretes lies au sommet enlevés
-                for(m=0;m<m_edges.size();m++){
-                    if(m_edges[m].m_from==k){
-                        m_edges[m].m_actif=false;
-                    }
-                    if(m_edges[m].m_to==k){
-                        m_edges[m].m_actif=false;
-                    }
-                }
-
-            /// nbs = nb de sommets quil reste
-            for(o=0;o<m_vertices.size();o++){
-                if(m_vertices[o].m_actif==true){
-                    nbs=nbs++;
-                }
-            }
-
-            /// nba = nb d'aretes quil reste
-            for(p=0;p<m_edges.size();p++){
-                if(m_edges[p].m_actif==true){
-                    nba=nba++;
-                }
-
-            if(nba<nbs-1){
-                for(k=0;k<m_vertices.size();k++){
-
-                if(m_vertices[k].m_actif=false){
-                    std::cout << k << " ";
-                }
-                std::cout << std::endl;
-            }
-            }
-            }
-
-            /// on reactive les sommets
-            for(k=0;k<i;k++){
-
-                m_vertices[k].m_actif=true;
-
-                /// on reactive les aretes lies au sommet enlevés
-                for(m=0;m<m_edges.size();m++){
-                    if(m_edges[m].m_from==k){
-                        m_edges[m].m_actif=true;
-                    }
-                    if(m_edges[m].m_to==k){
-                        m_edges[m].m_actif=true;
-                    }
-                }
-
-        }
-
-
-
-    }
-}
-    }
-}
+//void Graph::algokconex()
+//{
+//    int i, j, k, o, p, m;
+//    int nbsommets=m_vertices.size();
+//    int nbs,nba;
+//
+//    /// i = nb de sommets que l'on enleve
+//    for(i=1;i<nbsommets+1;i++){
+//
+//        /// j = num de la combinaison testé
+//        for(j=0;j<nbcombi(i,nbsommets);j++){
+//
+//
+//
+//            /// k = num du sommet enlevé, on desactive les sommets
+//            for(k=0;k<i;k++){
+//
+//                m_vertices[k].m_actif=false;
+//
+//                /// on desactive les aretes lies au sommet enlevés
+//                for(m=0;m<m_edges.size();m++){
+//                    if(m_edges[m].m_from==k){
+//                        m_edges[m].m_actif=false;
+//                    }
+//                    if(m_edges[m].m_to==k){
+//                        m_edges[m].m_actif=false;
+//                    }
+//                }
+//
+//            /// nbs = nb de sommets quil reste
+//            for(o=0;o<m_vertices.size();o++){
+//                if(m_vertices[o].m_actif==true){
+//                    nbs=nbs++;
+//                }
+//            }
+//
+//            /// nba = nb d'aretes quil reste
+//            for(p=0;p<m_edges.size();p++){
+//                if(m_edges[p].m_actif==true){
+//                    nba=nba++;
+//                }
+//
+//            if(nba<nbs-1){
+//                for(k=0;k<m_vertices.size();k++){
+//
+//                if(m_vertices[k].m_actif=false){
+//                    std::cout << k << " ";
+//                }
+//                std::cout << std::endl;
+//            }
+//            }
+//            }
+//
+//            /// on reactive les sommets
+//            for(k=0;k<i;k++){
+//
+//                m_vertices[k].m_actif=true;
+//
+//                /// on reactive les aretes lies au sommet enlevés
+//                for(m=0;m<m_edges.size();m++){
+//                    if(m_edges[m].m_from==k){
+//                        m_edges[m].m_actif=true;
+//                    }
+//                    if(m_edges[m].m_to==k){
+//                        m_edges[m].m_actif=true;
+//                    }
+//                }
+//
+//        }
+//
+//
+//
+//    }
+//}
+//    }
+//}
 
 int Graph::fact(int k)
 {
@@ -686,7 +688,7 @@ void Graph::ajoutsommetutilisateur(int a)
     // m_interface = new GraphInterface(50, 0, 750, 600);
 
 
-    std::ifstream fichier("Marin_Antartique.txt");
+    std::ifstream fichier("Insectes.txt");
     if(fichier)
     {
         //Tout est prêt pour la lecture.
@@ -730,7 +732,7 @@ void Graph::ajoutsommetutilisateur(int a)
         fichier >> valeur4;
         fichier >> valeur2;
 
-     if(valeur3==a)
+     if((valeur3==a)&&(m_vertices.count(valeur4)==1))
       {
           std::cout<< " i= " << i;
            std::cout<< " pk1" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
@@ -739,21 +741,26 @@ void Graph::ajoutsommetutilisateur(int a)
         add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
 
 
-        m_edges[i].setfrom(valeur3);
-        m_edges[i].setto(valeur4);
+       // m_edges[i].setfrom(valeur3);
+       // m_edges[i].setto(valeur4);
       }
 
 
-     if(valeur4==a)
+
+     if((valeur4==a)&&(m_vertices.count(valeur3)==1))
       {
 
+
+
         std::cout<< " i= " << i;
-           std::cout<< " pk2" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
-           std::cout<< std::endl;
+        std::cout<< " pk2" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
+        std::cout<< std::endl;
+
+        //if (m_vertices.count())
         add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
-    m_edges[i].setfrom(valeur3);
-    m_edges[i].setto(valeur4);
-    std::cout<< " pk3" << " "<< i << " "<<m_edges[i].m_from << " "<<  m_edges[i].m_to;
+       // m_edges[i].setfrom(valeur3);
+       // m_edges[i].setto(valeur4);
+        std::cout<< " pk3" << " "<< i << " "<<m_edges[i].m_from << " "<<  m_edges[i].m_to;
 
 
 
