@@ -243,7 +243,7 @@ void Graph::chargergraphe()
     ///std::cout << "Entrez le nom du fichier contenant le graphe : " << std::endl;
     ///std::cin >> nomgraphe;
 
-    std::ifstream fichier("Marin_Antartique.txt");
+    std::ifstream fichier("toto.txt");
     if(fichier)
     {
         //Tout est prêt pour la lecture.
@@ -590,7 +590,7 @@ void Graph::ajoutsommetutilisateur(int a)
     // m_interface = new GraphInterface(50, 0, 750, 600);
 
 
-    std::ifstream fichier("Marin_Antartique.txt");
+    std::ifstream fichier("Insectes.txt");
     if(fichier)
     {
         //Tout est prêt pour la lecture.
@@ -634,7 +634,7 @@ void Graph::ajoutsommetutilisateur(int a)
         fichier >> valeur4;
         fichier >> valeur2;
 
-     if(valeur3==a)
+     if((valeur3==a)&&(m_vertices.count(valeur4)==1))
       {
           std::cout<< " i= " << i;
            std::cout<< " pk1" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
@@ -643,21 +643,26 @@ void Graph::ajoutsommetutilisateur(int a)
         add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
 
 
-        m_edges[i].setfrom(valeur3);
-        m_edges[i].setto(valeur4);
+       // m_edges[i].setfrom(valeur3);
+       // m_edges[i].setto(valeur4);
       }
 
 
-     if(valeur4==a)
+
+     if((valeur4==a)&&(m_vertices.count(valeur3)==1))
       {
 
+
+
         std::cout<< " i= " << i;
-           std::cout<< " pk2" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
-           std::cout<< std::endl;
+        std::cout<< " pk2" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
+        std::cout<< std::endl;
+
+        //if (m_vertices.count())
         add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
-    m_edges[i].setfrom(valeur3);
-    m_edges[i].setto(valeur4);
-    std::cout<< " pk3" << " "<< i << " "<<m_edges[i].m_from << " "<<  m_edges[i].m_to;
+       // m_edges[i].setfrom(valeur3);
+       // m_edges[i].setto(valeur4);
+        std::cout<< " pk3" << " "<< i << " "<<m_edges[i].m_from << " "<<  m_edges[i].m_to;
 
 
 
