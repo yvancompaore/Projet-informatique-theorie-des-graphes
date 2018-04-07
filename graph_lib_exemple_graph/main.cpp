@@ -1,7 +1,8 @@
 #include "grman/grman.h"
 #include <iostream>
-
 #include "graph.h"
+
+
 
 int main()
 {
@@ -26,9 +27,22 @@ int main()
 
         /// Mise à jour générale (clavier/souris/buffer etc...)
         grman::mettre_a_jour();
+
+         if(key[KEY_SPACE])
+    {
+    std::cout << "nSCCs in first graph " << std::endl ;
+    Graph g1(5);
+    g1.addEdge(1, 0);
+    g1.addEdge(0, 2);
+    g1.addEdge(2, 1);
+    g1.addEdge(0, 3);
+    g1.addEdge(3, 4);
+    g1.SCC();
+    }
     }
 
     grman::fermer_allegro();
+
 
     return 0;
 }

@@ -1,6 +1,12 @@
 #include "graph.h"
 #include <sstream>
 #include <fstream>
+#include <vector>
+#include <stack>
+#include <list>
+
+
+
 
 namespace patch
 {
@@ -208,7 +214,7 @@ void Graph::chargergraphe()
     ///std::cout << "Entrez le nom du fichier contenant le graphe : " << std::endl;
     ///std::cin >> nomgraphe;
 
-    std::ifstream fichier("Marin_Antartique.txt");
+    std::ifstream fichier("Connexite_Rap.txt");
     if(fichier)
     {
         //Tout est prêt pour la lecture.
@@ -308,4 +314,102 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_interface->m_main_box.add_child(ei->m_top_edge);
     m_edges[idx] = Edge(weight, ei);
 }
+
+Graph::Graph(int V)
+{
+    this->V = V;
+    adj = new std::list<int>[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w);
+}
+
+void Graph::SCCUtil(int u, int disc[], int low[], std::stack<int> *st,
+                    bool stackMember[])
+{
+    // A static variable is used for simplicity, we can avoid use
+    // of static variable by passing a pointer.
+    static int time = 0;
+
+    // Initialize discovery time and low value
+    disc[u] = low[u] = ++time;
+    st->push(u);
+    stackMember[u] = true;
+
+    // Go through all vertices adjacent to this
+    std::list<int>::iterator i;
+    for (i = adj[u].begin(); i != adj[u].end(); ++i)
+    {
+        int v = *i;  // v is current adjacent of 'u'
+
+        // If v is not visited yet, then recur for it
+        if (disc[v] == -1)
+        {
+            SCCUtil(v, disc, low, st, stackMember);
+
+            // Check if the subtree rooted with 'v' has a
+            // connection to one of the ancestors of 'u'
+            // Case 1 (per above discussion on Disc and Low value)
+            low[u]  = std::min(low[u], low[v]);
+        }
+
+        // Update low value of 'u' only of 'v' is still in stack
+        // (i.e. it's a back edge, not cross edge).
+        // Case 2 (per above discussion on Disc and Low value)
+        else if (stackMember[v] == true)
+            low[u]  = std::min(low[u], disc[v]);
+    }
+
+    // head node found, pop the stack and print an SCC
+    int w = 0;  // To store stack extracted vertices
+    if (low[u] == disc[u])
+    {
+        while (st->top() != u)
+        {
+            w = (int) st->top();
+            std::cout << w << " ";
+            stackMember[w] = false;
+            st->pop();
+        }
+        w = (int) st->top();
+        std::cout << w << " "<<std::endl;
+        stackMember[w] = false;
+        st->pop();
+    }
+}
+
+// The function to do DFS traversal. It uses SCCUtil()
+void Graph::SCC()
+{
+    int *disc = new int[V];
+    int *low = new int[V];
+    bool *stackMember = new bool[V];
+    std::stack<int> *st = new std::stack<int>();
+
+    // Initialize disc and low, and stackMember arrays
+    for (int i = 0; i < V; i++)
+    {
+        disc[i] = NIL;
+        low[i] = NIL;
+        stackMember[i] = false;
+    }
+
+    // Call the recursive helper function to find strongly
+    // connected components in DFS tree with vertex 'i'
+    for (int i = 0; i < V; i++)
+        if (disc[i] == NIL)
+            SCCUtil(i, disc, low, st, stackMember);
+}
+
+
+
+
+
+
+
+
+
+
 

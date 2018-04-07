@@ -113,3 +113,66 @@
 	<iostream>
 	"graph.h"
 
+1523029015 source:c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.cpp
+	"graph.h"
+	<sstream>
+	<fstream>
+	<vector>
+	<stack>
+	<list>
+
+1523029015 c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\graph.h
+	<stack>
+	<list>
+	<iostream>
+	<vector>
+	<map>
+	<string>
+	<memory>
+	"grman/grman.h"
+
+1522847241 c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1522847241 c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman_couleurs.h
+
+1522847241 c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\coords.h
+	<cmath>
+
+1522847241 c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1522847241 source:c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\coords.cpp
+	"coords.h"
+
+1522847241 source:c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1522847241 source:c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\grman\widget.cpp
+	"widget.h"
+
+1523028939 source:c:\users\nizar\projet-informatique-theorie-des-graphes\graph_lib_exemple_graph\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+

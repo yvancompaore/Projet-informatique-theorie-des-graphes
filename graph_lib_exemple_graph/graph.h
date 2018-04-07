@@ -1,5 +1,10 @@
 #ifndef GRAPH_H_INCLUDED
 #define GRAPH_H_INCLUDED
+#include <stack>
+#include <list>
+#include <iostream>
+#define NIL -1
+
 
 /**************************************************************
     Ici sont proposées 3 classes fondamentales
@@ -131,9 +136,11 @@ class Vertex
     friend class Edge;
     friend class EdgeInterface;
 
+
+
     private :
         /// liste des indices des arcs arrivant au sommet : accès aux prédécesseurs
-        std::vector<int> m_in;
+         std::vector<int> m_in;
 
         /// liste des indices des arcs partant du sommet : accès aux successeurs
         std::vector<int> m_out;
@@ -276,7 +283,16 @@ class GraphInterface
 
 
 class Graph
+
 {
+
+    int V ;    // No. of vertices
+    std::list<int> *adj;    // A dynamic array of adjacency lists
+
+    // A Recursive DFS based function used by SCC()
+    void SCCUtil(int u, int disc[], int low[],
+                 std::stack<int> *st, bool stackMember[]);
+
     private :
 
         /// La "liste" des arêtes
@@ -289,7 +305,9 @@ class Graph
         std::shared_ptr<GraphInterface> m_interface = nullptr;
 
 
+
     public:
+
 
         /// Les constructeurs sont à compléter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
@@ -311,6 +329,13 @@ class Graph
 
         /// Nouvelles méthodes :
         void chargergraphe();
+
+    Graph(int V);   // Constructor
+    void addEdge(int v, int w);   // function to add an edge to graph
+    void SCC();    // prints strongly connected components
+
+
+
 };
 
 
