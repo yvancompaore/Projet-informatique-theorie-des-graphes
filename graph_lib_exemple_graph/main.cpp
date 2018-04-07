@@ -18,6 +18,7 @@ int main()
     g.chargergraphe();
 
 
+
     /// Vous gardez la main sur la "boucle de jeu"
     /// ( contrairement à des frameworks plus avancés )
     while ( !key[KEY_ESC] )
@@ -43,6 +44,10 @@ int main()
 
     grman::fermer_allegro();
 
+
+
+  ///  g.algokconex();
+    g.sauvegarderfichier();
 
     return 0;
 }

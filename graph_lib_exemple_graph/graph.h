@@ -158,6 +158,8 @@ class Vertex
 
     public:
 
+        bool m_actif=true;
+
         /// Les constructeurs sont à compléter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
         Vertex (double value=0, VertexInterface *interface=nullptr) :
@@ -232,6 +234,8 @@ class Edge
 
     public:
 
+        bool m_actif=true;
+
         /// Les constructeurs sont à compléter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
         Edge (double weight=0, EdgeInterface *interface=nullptr) :
@@ -242,6 +246,9 @@ class Edge
         /// Voir l'implémentation Graph::update dans le .cpp
         void pre_update();
         void post_update();
+
+        void setfrom(int from);
+        void setto(int to);
 };
 
 
@@ -269,6 +276,13 @@ class GraphInterface
 
         /// Dans cette boite seront ajoutés des boutons de contrôle etc...
         grman::WidgetBox m_tool_box;
+
+         grman::WidgetButton m_boutonsupp;//boutonsupprimer
+         grman::WidgetImage m_bouton_supp_image; //image supprimer
+        grman::WidgetButton m_boutonsave;//boutonsupprimer
+         grman::WidgetImage m_bouton_save_image; //image supprimer
+        grman::WidgetButton m_boutonajouter;//bouton ajouter
+         grman::WidgetImage m_boutonajouter_image;//image bouton ajouter
 
 
         // A compléter éventuellement par des widgets de décoration ou
@@ -330,10 +344,24 @@ class Graph
         /// Nouvelles méthodes :
         void chargergraphe();
 
+
     Graph(int V);   // Constructor
     void addEdge(int v, int w);   // function to add an edge to graph
     void SCC();    // prints strongly connected components
 
+
+
+        void algodeconnexion();
+
+        void test_remove_edge(int eidx);
+        void test_remove_sommet();
+
+        void sauvegarderfichier();
+        void ajoutsommetutilisateur(int a);
+
+        void algokconex();
+        int fact(int k);
+        int nbcombi(int k, int n);
 
 
 };

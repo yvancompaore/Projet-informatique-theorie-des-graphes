@@ -10,12 +10,12 @@
 
 namespace patch
 {
-    template < typename T > std::string to_string(const T& n)
-    {
-        std::ostringstream stm;
-        stm << n;
-        return stm.str();
-    }
+template < typename T > std::string to_string(const T& n)
+{
+    std::ostringstream stm;
+    stm << n;
+    return stm.str();
+}
 }
 /***************************************************
                     VERTEX
@@ -31,7 +31,7 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
 
     // Le slider de réglage de valeur
     m_top_box.add_child( m_slider_value );
-    m_slider_value.set_range(0.0 , 100.0); // Valeurs arbitraires, à adapter...
+    m_slider_value.set_range(0.0, 100.0);  // Valeurs arbitraires, à adapter...
     m_slider_value.set_dim(20,80);
     m_slider_value.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
 
@@ -109,7 +109,7 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 
     // Le slider de réglage de valeur
     m_box_edge.add_child( m_slider_weight );
-    m_slider_weight.set_range(0.0 , 100.0); // Valeurs arbitraires, à adapter...
+    m_slider_weight.set_range(0.0, 100.0);  // Valeurs arbitraires, à adapter...
     m_slider_weight.set_dim(16,40);
     m_slider_weight.set_gravity_y(grman::GravityY::Up);
 
@@ -143,7 +143,15 @@ void Edge::post_update()
     m_weight = m_interface->m_slider_weight.get_value();
 }
 
+void Edge::setfrom(int from)
+{
+    m_from=from;
+}
 
+void Edge::setto(int to)
+{
+    m_to=to;
+}
 
 /***************************************************
                     GRAPH
@@ -165,6 +173,33 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_main_box.set_dim(908,720);
     m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
     m_main_box.set_bg_color(BLANCJAUNE);
+
+    //affichage de boutton supp
+    m_tool_box.add_child(m_boutonsupp);//affichage boutton sur la zone des bouttons
+    //m_boutonsupp.set_dim(40,30);//coordoner du boutton sur lecran
+    m_boutonsupp.set_frame(2,2,40,30);//
+    // m_boutonsupp.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
+    m_boutonsupp.set_bg_color(NOIR);
+    m_boutonsupp.add_child(m_bouton_supp_image);//ajout de l'image
+    m_bouton_supp_image.set_pic_name("supp.png");
+
+    //affichage de boutton save
+    m_tool_box.add_child(m_boutonsave);//affichage boutton sur la zone des bouttons
+    //m_boutonsave.set_dim(40,30);
+    m_boutonsave.set_frame(2,50,40,30);
+    //m_boutonsave.set_gravity_x(grman::GravityX::Right);
+    m_boutonsave.set_bg_color(NOIR);
+    m_boutonsave.add_child(m_bouton_save_image);//ajout de l'image
+    m_bouton_save_image.set_pic_name("save.png");
+
+    m_tool_box.add_child(m_boutonajouter);
+    m_boutonajouter.set_frame(2,90,40,30);
+    m_boutonajouter.set_bg_color(NOIR);
+    m_boutonajouter.add_child(m_boutonajouter_image);
+    m_boutonajouter_image.set_pic_name("ajouter.png");
+
+
+
 }
 
 
@@ -214,7 +249,14 @@ void Graph::chargergraphe()
     ///std::cout << "Entrez le nom du fichier contenant le graphe : " << std::endl;
     ///std::cin >> nomgraphe;
 
-    std::ifstream fichier("Connexite_Rap.txt");
+
+
+
+
+    std::ifstream fichier("Insectes.txt");
+
+
+
     if(fichier)
     {
         //Tout est prêt pour la lecture.
@@ -235,7 +277,8 @@ void Graph::chargergraphe()
     double valeur2;
     std::string nomdelimage;
 
-    for(i=0;i<nbsommets;i++){
+    for(i=0; i<nbsommets; i++)
+    {
         fichier >> valeur1;
         fichier >> valeur2;
         fichier >> valeur3;
@@ -247,13 +290,18 @@ void Graph::chargergraphe()
     }
 
     /// on récupère les informations de chaques arcs
-    for(i=0;i<nbarcs;i++){
+    for(i=0; i<nbarcs; i++)
+    {
         fichier >> valeur1;
         fichier >> valeur3;
         fichier >> valeur4;
         fichier >> valeur2;
 
         add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
+
+        //m_edges[i].setfrom(valeur3);
+        //m_edges[i].setto(valeur4);
+
     }
 }
 
@@ -276,6 +324,43 @@ void Graph::update()
 
     for (auto &elt : m_edges)
         elt.second.post_update();
+
+    //si on appuie sur suprrimer
+    if(m_interface->m_boutonsupp.clicked())
+    {
+        /*std::cout<< "ok"<<std::endl ;
+        int a;
+        std::cout<< "quel sommet voulez vous supp" <<std::endl;
+        std::cin>>a;
+        test_remove_edge(a);*/
+        //action a faire
+        test_remove_sommet();
+    }
+
+    //si on appuie sur sauvegarder
+    if(m_interface->m_boutonsave.clicked())
+    {
+        std::cout<< "bon"<<std::endl ;
+
+        sauvegarderfichier();
+
+
+    }
+
+     if(m_interface->m_boutonajouter.clicked())
+    {
+        std::cout<< "mal"<<std::endl ;
+        std::cout<< "Quel sommet voulez vous rajouter?"<<std::endl ;
+        int a;
+        std::cin>>a;
+        ajoutsommetutilisateur(a);
+
+
+
+
+    }
+
+
 
 }
 
@@ -313,7 +398,300 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     EdgeInterface *ei = new EdgeInterface(m_vertices[id_vert1], m_vertices[id_vert2]);
     m_interface->m_main_box.add_child(ei->m_top_edge);
     m_edges[idx] = Edge(weight, ei);
+
+
+    m_edges[idx].m_from=id_vert1;
+    m_edges[idx].m_to=id_vert2;
+
+    m_vertices[id_vert1].m_out.push_back(idx);
+    m_vertices[id_vert2].m_in.push_back(idx);
+
+    /// OOOPS ! Prendre en compte l'arc ajouté dans la topologie du graphe !
+    m_edges[idx].m_from = id_vert1;
+    m_edges[idx].m_to = id_vert2;
+    m_vertices[id_vert1].m_out.push_back(idx);
+    m_vertices[id_vert2].m_in.push_back(idx);
+
+
+
+
+
+
+
+
 }
+
+//void Graph::algodeconnexion()
+//{
+//    int nbsommets, i,j,k;
+//    int ctp=0;
+//    nbsommets=m_vertices.size();
+//
+//    std::vector<std::vector<Vertex>> mapi;
+//    std::vector<Vertex> sauvegarde;
+//
+//    for(i=0;i<nbsommets;i++)
+//    {
+//        sauvegarde.push_back(m_vertices[i]);
+//        test_remove_vertex(i);
+//        nbsommets=m_vertices.size();
+//
+//        for(j=0;j<nbsommets;j++)
+//        {
+//            if(m_vertices[j].m_in.size()==0 && m_vertices[j].m_out.size()==0)
+//            {
+//                mapi[cpt].push_back(m_vertices[j]);
+//                cpt++;
+//            }
+//        }
+//
+//        for(k=0;k<sauvegarde.size();k++)
+//        {
+//            test_ajouter_vertex(sauvegarde[k]);
+//        }
+//
+//        for(k=0;k<sauvegarde.size();k++)
+//        {
+//            sauvegarde.pop_back();
+//        }
+//
+//
+//    }
+//
+//    for(i=0;i<mapi.size();i++)
+//    {
+//        std::cout << i << " : ";
+//
+//        for(j=0;j<mapi[i].size();j++)
+//        {
+//           /// afficher le numero du sommet
+//        }
+//
+//        std::cout << std::endl;
+//    }
+//}
+
+//void Graph::algokconex()
+//{
+//    int i, j, k, o, p, m;
+//    int nbsommets=m_vertices.size();
+//    int nbs,nba;
+//
+//    /// i = nb de sommets que l'on enleve
+//    for(i=1;i<nbsommets+1;i++){
+//
+//        /// j = num de la combinaison testé
+//        for(j=0;j<nbcombi(i,nbsommets);j++){
+//
+//
+//
+//            /// k = num du sommet enlevé, on desactive les sommets
+//            for(k=0;k<i;k++){
+//
+//                m_vertices[k].m_actif=false;
+//
+//                /// on desactive les aretes lies au sommet enlevés
+//                for(m=0;m<m_edges.size();m++){
+//                    if(m_edges[m].m_from==k){
+//                        m_edges[m].m_actif=false;
+//                    }
+//                    if(m_edges[m].m_to==k){
+//                        m_edges[m].m_actif=false;
+//                    }
+//                }
+//
+//            /// nbs = nb de sommets quil reste
+//            for(o=0;o<m_vertices.size();o++){
+//                if(m_vertices[o].m_actif==true){
+//                    nbs=nbs++;
+//                }
+//            }
+//
+//            /// nba = nb d'aretes quil reste
+//            for(p=0;p<m_edges.size();p++){
+//                if(m_edges[p].m_actif==true){
+//                    nba=nba++;
+//                }
+//
+//            if(nba<nbs-1){
+//                for(k=0;k<m_vertices.size();k++){
+//
+//                if(m_vertices[k].m_actif=false){
+//                    std::cout << k << " ";
+//                }
+//                std::cout << std::endl;
+//            }
+//            }
+//            }
+//
+//            /// on reactive les sommets
+//            for(k=0;k<i;k++){
+//
+//                m_vertices[k].m_actif=true;
+//
+//                /// on reactive les aretes lies au sommet enlevés
+//                for(m=0;m<m_edges.size();m++){
+//                    if(m_edges[m].m_from==k){
+//                        m_edges[m].m_actif=true;
+//                    }
+//                    if(m_edges[m].m_to==k){
+//                        m_edges[m].m_actif=true;
+//                    }
+//                }
+//
+//        }
+//
+//
+//
+//    }
+//}
+//    }
+//}
+
+int Graph::fact(int k)
+{
+    int i,result=1;
+    for(i=1;i<k+1;i++){
+        result=result*i;
+    }
+
+    return result;
+
+}
+
+int Graph::nbcombi(int k, int n)
+{
+    return (fact(n)/(fact(k)*fact(n-k)));
+}
+
+
+
+
+
+/// eidx index of edge to remove
+void Graph::test_remove_edge(int eidx)
+{
+/// référence vers le Edge à enlever
+    Edge &remed=m_edges.at(eidx);
+  //  std::cout << "Removing edge " << eidx << " " << remed.m_from << "->" << remed.m_to << " " << remed.m_weight << std::endl;
+
+/// test : on a bien des éléments interfacés
+    if (m_interface && remed.m_interface)
+    {
+/// Ne pas oublier qu'on a fait ça à l'ajout de l'arc :
+        /* EdgeInterface *ei = new EdgeInterface(m_vertices[id_vert1], m_vertices[id_vert2]); */
+        /* m_interface->m_main_box.add_child(ei->m_top_edge); */
+        /* m_edges[idx] = Edge(weight, ei); */
+/// Le new EdgeInterface ne nécessite pas de delete car on a un shared_ptr
+/// Le Edge ne nécessite pas non plus de delete car on n'a pas fait de new (sémantique par valeur)
+/// mais il faut bien enlever le conteneur d'interface m_top_edge de l'arc de la main_box du graphe
+        m_interface->m_main_box.remove_child( remed.m_interface->m_top_edge);
+    }
+
+/// Il reste encore à virer l'arc supprimé de la liste des entrants et sortants des 2 sommets to et from !
+/// References sur les listes de edges des sommets from et to
+    std::vector<int> &vefrom = m_vertices[remed.m_from].m_out;
+    std::vector<int> &veto = m_vertices[remed.m_to].m_in;
+    vefrom.erase( std::remove( vefrom.begin(), vefrom.end(), eidx ), vefrom.end() );
+    veto.erase( std::remove( veto.begin(), veto.end(), eidx ), veto.end() );
+/// Le Edge ne nécessite pas non plus de delete car on n'a pas fait de new (sémantique par valeur)
+/// Il suffit donc de supprimer l'entrée de la map pour supprimer à la fois l'Edge et le EdgeInterface
+/// mais malheureusement ceci n'enlevait pas automatiquement l'interface top_edge en tant que child de main_box !
+    m_edges.erase( eidx );
+/// Tester la cohérence : nombre d'arc entrants et sortants des sommets 1 et 2
+   /* std::cout << m_vertices[remed.m_from].m_in.size() << " " << m_vertices[remed.m_from].m_out.size() << std::endl;
+    std::cout << m_vertices[remed.m_to].m_in.size() << " " << m_vertices[remed.m_to].m_out.size() << std::endl;
+    std::cout << m_edges.size() << std::endl;*/
+
+  /* int b= m_vertices[1].m_in[0];
+   std::cout<<" " << b;*/
+
+
+}
+
+//fonction pour supprimer sommet
+void Graph::test_remove_sommet()
+{
+
+    std::cout<< "Quel sommet voulez vous supprimer?? " << std::endl;
+    int a;
+    std::cin>>a;
+
+    Vertex &remed=m_vertices.at(a);
+
+    std::cout<< m_vertices[a].m_out.size() << std::endl;
+    //suppression de ses aretes entrant
+    for(int i=0; i<m_vertices[a].m_in.size(); i++)
+    {
+            int b= m_vertices[a].m_in[i];
+             test_remove_edge(b);
+    }
+
+    //suppression de ses aretes sortant
+    for(int i=0; i<m_vertices[a].m_out.size(); i++)
+    {
+        //std::cout<< m_vertices[a].m_in.size() << " ";
+
+    std::cout<< m_vertices[a].m_out.size() << std::endl;
+    std::cout << " i " << i << std::endl;
+            int b= m_vertices[a].m_out[i];
+             test_remove_edge(b);
+    }
+
+    for(auto& elem: m_edges)
+    {
+       if((elem.second.m_to==a)||(elem.second.m_from==a))
+       {
+           test_remove_edge(elem.first);
+       }
+
+
+    }
+
+
+
+
+     m_interface->m_main_box.remove_child( remed.m_interface->m_top_box );
+     m_vertices.erase(a);
+
+}
+void Graph::sauvegarderfichier()
+{
+    std::string nom;
+    std::cout << "Entrez le nom du fichier de sauvegarde : " << std::endl;
+    std::cin >> nom;
+
+    nom=nom+".txt";
+    std::ofstream fichier(nom.c_str());
+
+    int nbsommets, nbarcs;
+    nbsommets=m_vertices.size();
+    nbarcs=m_edges.size();
+
+    fichier << nbsommets;
+    fichier << " ";
+    fichier << nbarcs << std::endl;
+
+    for (const auto& elem : m_vertices)
+    {
+        fichier << elem.first << " ";
+        fichier << elem.second.m_value << " ";
+        fichier << elem.second.m_interface->m_top_box.get_posx() << " ";
+        fichier << elem.second.m_interface->m_top_box.get_posy() << " ";
+        fichier << elem.second.m_interface->m_img.getpicname() << std::endl;
+    }
+
+    for (const auto& elem2 : m_edges)
+    {
+        fichier << elem2.first << " ";
+        fichier << elem2.second.m_from << " ";
+        fichier << elem2.second.m_to << " ";
+        fichier << elem2.second.m_weight << std::endl;
+    }
+
+
+}
+
 
 Graph::Graph(int V)
 {
@@ -403,6 +781,95 @@ void Graph::SCC()
             SCCUtil(i, disc, low, st, stackMember);
 }
 
+void Graph::ajoutsommetutilisateur(int a)
+{
+    //m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+    // La ligne précédente est en gros équivalente à :
+    // m_interface = new GraphInterface(50, 0, 750, 600);
+
+
+    std::ifstream fichier("Insectes.txt");
+    if(fichier)
+    {
+        //Tout est prêt pour la lecture.
+    }
+    else
+    {
+        std::cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << std::endl;
+    }
+
+    /// on récupère le nombre de sommets et d'arcs du graphe en début de fichier :
+    int nbarcs, nbsommets;
+    fichier >> nbsommets;
+    fichier >> nbarcs;
+
+    /// on récupère les informations de chaques sommets
+    int i;
+    int valeur1, valeur3, valeur4;
+    double valeur2;
+    std::string nomdelimage;
+
+    for(i=0; i<nbsommets; i++)
+    {
+        fichier >> valeur1;
+        fichier >> valeur2;
+        fichier >> valeur3;
+        fichier >> valeur4;
+        fichier >> nomdelimage;
+
+        if(a==valeur1)
+        {
+        add_interfaced_vertex(valeur1, valeur2, valeur3, valeur4, nomdelimage);
+        }
+    }
+
+
+    /// on récupère les informations de chaques arcs
+   for(i=0; i<nbarcs; i++)
+    {
+        fichier >> valeur1;
+        fichier >> valeur3;
+        fichier >> valeur4;
+        fichier >> valeur2;
+
+     if((valeur3==a)&&(m_vertices.count(valeur4)==1))
+      {
+          std::cout<< " i= " << i;
+           std::cout<< " pk1" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
+           std::cout<< std::endl;
+
+        add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
+
+
+       // m_edges[i].setfrom(valeur3);
+       // m_edges[i].setto(valeur4);
+      }
+
+
+
+     if((valeur4==a)&&(m_vertices.count(valeur3)==1))
+      {
+
+
+
+        std::cout<< " i= " << i;
+        std::cout<< " pk2" << "  " << valeur1 << " " << valeur3<< " " << valeur4  << " " << valeur2;
+        std::cout<< std::endl;
+
+        //if (m_vertices.count())
+        add_interfaced_edge(valeur1, valeur3, valeur4, valeur2);
+       // m_edges[i].setfrom(valeur3);
+       // m_edges[i].setto(valeur4);
+        std::cout<< " pk3" << " "<< i << " "<<m_edges[i].m_from << " "<<  m_edges[i].m_to;
+
+
+
+      }
+
+
+
+
+    }
 
 
 
@@ -411,5 +878,12 @@ void Graph::SCC()
 
 
 
+
+
+
+
+
+
+}
 
 
